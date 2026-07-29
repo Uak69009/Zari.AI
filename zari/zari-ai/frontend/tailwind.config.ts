@@ -9,6 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        "zari-accent": "#00FFA3",
+        "zari-bg": "#0A1A10",
         "royal-green": "#1A4D2E",
         "leaf-green": "#4F6F52",
         "off-white": "#F5EFE6",

@@ -5,6 +5,8 @@ import dynamic from "next/dynamic";
 import { Globe2, Leaf, MessageCircle, Activity, ScanLine } from "lucide-react";
 import InferenceTester from "./components/InferenceTester";
 import DiagnosisShowcase from "./components/DiagnosisShowcase";
+import CropCards from "./components/CropCards";
+import Footer from "./components/Footer";
 
 const MotionDiv = dynamic(() => import("framer-motion").then((mod) => mod.motion.div), { ssr: false }) as any;
 const AnimatePresenceWrapper = dynamic(() => import("framer-motion").then((mod) => mod.AnimatePresence), { ssr: false }) as any;
@@ -238,6 +240,8 @@ export default function Home() {
       </div>
 
       <DiagnosisShowcase />
+      <CropCards />
+      <Footer />
     </main>
   );
 }

@@ -3,8 +3,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
-  title: "ZARI.ai - Agricultural Intelligence",
-  description: "ZARI.ai is a multi-modal agricultural crop disease diagnosis and advisory platform.",
+  title: "ZARI.ai — Crop Disease Diagnosis",
+  description: "ZARI.ai is a multi-modal agricultural crop disease diagnosis and advisory platform for Pakistani farmers.",
 };
 
 export default function RootLayout({
@@ -14,12 +14,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#0A1A10] text-gray-200 antialiased">
-        
-        {/* Responsive Client-Side Navigation Bar */}
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+      </head>
+      <body style={{ backgroundColor: "#0A1A10", color: "#E5E7EB", fontFamily: "Inter, system-ui, sans-serif" }}>
         <Navbar />
-
-        {/* Full-width Main Content Container */}
         <main className="w-full">
           {children}
         </main>

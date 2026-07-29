@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Leaf, Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -54,29 +53,22 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Navigation Dropdown */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div 
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-[#0A1A10]/95 border-b border-white/10 overflow-hidden"
-          >
-            <div className="flex flex-col px-6 py-4 space-y-4">
-              {navLinks.map((link) => (
-                <Link 
-                  key={link.name} 
-                  href={link.href} 
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-base font-semibold text-gray-300 hover:text-[#00FFA3] transition-colors block border-b border-white/5 pb-2"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-[#0A1A10]/95 border-b border-white/10 overflow-hidden">
+          <div className="flex flex-col px-6 py-4 space-y-4">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-base font-semibold text-gray-300 hover:text-[#00FFA3] transition-colors block border-b border-white/5 pb-2"
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
