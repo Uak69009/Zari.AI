@@ -72,30 +72,36 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white text-gray-900 relative overflow-x-hidden font-sans">
       
-      {/* 1. Light Map Background */}
+      {/* 1. Minimalist World Map Background with Pakistan Highlight */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 flex items-center justify-center">
         <div 
-          className="absolute w-full h-[800px] opacity-10 bg-no-repeat bg-center bg-contain"
+          className="absolute w-full max-w-6xl h-[650px] opacity-25 bg-no-repeat bg-center bg-contain"
           style={{ 
             backgroundImage: "url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg')",
-            filter: "brightness(0) saturate(100%) invert(32%) sepia(85%) saturate(542%) hue-rotate(97deg) brightness(92%) contrast(92%)"
+            filter: "brightness(0) saturate(100%) invert(20%) sepia(10%) saturate(1000%) hue-rotate(180deg) brightness(85%)"
           }}
         ></div>
         
-        {/* Soft Background Accent Circles */}
-        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-100 opacity-60 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-emerald-50 opacity-80 rounded-full blur-[150px]" />
+        {/* Soft Background Accent */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-emerald-50 opacity-70 rounded-full blur-[100px]" />
 
-        {/* Pulse Points */}
-        {mounted && pulsePoints.map((point, idx) => (
-          <MotionDiv
-            key={idx}
-            className="absolute w-3 h-3 md:w-4 md:h-4 bg-emerald-600 rounded-full shadow-[0_0_12px_#059669]"
-            style={{ top: point.top, left: point.left }}
-            animate={{ scale: [1, 1.8, 1], opacity: [0.7, 0.3, 0.7] }}
-            transition={{ duration: point.duration, repeat: Infinity, delay: point.delay, ease: "easeInOut" }}
-          />
-        ))}
+        {/* Simple & Clean Pakistan Green Highlight Marker */}
+        {mounted && (
+          <div className="absolute top-[38%] left-[67.5%] flex items-center gap-2 z-10">
+            <MotionDiv
+              className="relative flex items-center justify-center"
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="w-5 h-5 bg-emerald-600 rounded-full opacity-30 animate-ping absolute" />
+              <div className="w-3.5 h-3.5 bg-emerald-600 rounded-full border-2 border-white shadow-md relative" />
+            </MotionDiv>
+            <div className="bg-white/90 border border-emerald-300 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1.5 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+              <span>Pakistan Node Active</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="relative z-10 container mx-auto px-6 py-16 flex flex-col items-center">
