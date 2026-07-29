@@ -67,26 +67,68 @@ export default function InferenceTester() {
 
   return (
     <div className="flex flex-col items-center w-full space-y-8">
-      {/* Upload Zone */}
-      <MotionDiv 
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
-        className="w-full flex flex-col items-center justify-center border-2 border-dashed border-emerald-300 rounded-2xl p-10 bg-emerald-50/40 hover:bg-emerald-50 transition-colors relative cursor-pointer"
-      >
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-        />
-        <div className="text-center flex flex-col items-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center mb-4">
-            <UploadCloud className="text-emerald-700 w-8 h-8" />
-          </div>
-          <p className="text-gray-900 font-bold text-lg mb-1">Drag & drop leaf image here</p>
-          <p className="text-sm text-gray-500 font-medium">Or click to browse (JPG, PNG)</p>
+      {/* 3D Flip Upload Zone Wrapper */}
+      <div className="w-full max-w-3xl flex flex-col items-center space-y-4">
+        <div className="w-full perspective-[1200px] h-72 cursor-pointer group">
+          <MotionDiv 
+            className="w-full h-full relative"
+            style={{ transformStyle: "preserve-3d" }}
+            initial={false}
+            animate={{ rotateY: 0 }}
+            whileHover={{ rotateY: 180 }}
+            transition={{ duration: 0.7, type: "spring", stiffness: 100, damping: 20 }}
+          >
+            {/* Front Face (Summary / Info) */}
+            <div 
+              className="absolute inset-0 w-full h-full flex flex-col items-center justify-center p-8 bg-white dark:bg-[#112417] border border-gray-200 dark:border-gray-800 rounded-2xl shadow-lg transition-colors"
+              style={{ backfaceVisibility: "hidden" }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Activity className="text-emerald-600 dark:text-emerald-400 w-6 h-6" />
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">Why Field Monitoring Matters</h3>
+              </div>
+              <p className="text-gray-600 dark:text-gray-400 text-center text-sm mb-4 leading-relaxed px-4">
+                Agriculture forms the backbone of Pakistan's economy. Integrating AI technology ensures early disease detection, higher crop yields, and national food security.
+              </p>
+              <h4 className="text-lg font-serif text-emerald-800 dark:text-emerald-300 text-center leading-relaxed" dir="rtl">
+                زراعت پاکستان کی معیشت کی ریڑھ کی ہڈی ہے۔ جدید ٹیکنالوجی کے ذریعے فصلوں کی بروقت نگرانی یقینی بناتی ہے کہ بیماریاں پہلے سے پکڑی جائیں اور پیداوار بڑھے۔
+              </h4>
+              
+              {/* Interactive hint */}
+              <div className="absolute bottom-4 flex items-center justify-center w-full text-xs text-gray-400 dark:text-gray-500 font-bold uppercase tracking-widest animate-pulse">
+                Hover to Upload
+              </div>
+            </div>
+
+            {/* Back Face (Actual Upload Zone) */}
+            <div 
+              className="absolute inset-0 w-full h-full flex flex-col items-center justify-center border-2 border-dashed border-emerald-300 dark:border-emerald-700 rounded-2xl p-10 bg-emerald-50/90 dark:bg-emerald-900/40 hover:bg-emerald-50 dark:hover:bg-emerald-900/60 transition-colors backdrop-blur-sm shadow-xl"
+              style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+            >
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+              />
+              <div className="text-center flex flex-col items-center">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-800/80 border border-emerald-200 dark:border-emerald-700 flex items-center justify-center mb-4 shadow-sm">
+                  <UploadCloud className="text-emerald-700 dark:text-emerald-400 w-8 h-8" />
+                </div>
+                <p className="text-emerald-900 dark:text-emerald-100 font-bold text-xl mb-2">Drop your crop image here</p>
+                <p className="text-sm text-emerald-700/70 dark:text-emerald-400/70 font-medium bg-emerald-100/50 dark:bg-emerald-900/30 px-4 py-1.5 rounded-full">
+                  Click to browse (JPG, PNG)
+                </p>
+              </div>
+            </div>
+          </MotionDiv>
         </div>
-      </MotionDiv>
+
+        {/* Instructional Text Below Card */}
+        <p className="text-sm text-gray-500 dark:text-gray-400 font-medium text-center">
+          Hover over the card to reveal the upload dropzone. Upload a clear, well-lit image of your crop leaf to run the AI diagnostics.
+        </p>
+      </div>
 
       {/* Preview & Action */}
       <AnimatePresenceWrapper>
@@ -144,42 +186,42 @@ export default function InferenceTester() {
           >
             
             {/* CV Inference Card */}
-            <div className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 flex flex-col h-full">
-              <div className="flex items-center space-x-3 mb-6 border-b border-gray-100 pb-4">
-                <div className="p-2 bg-emerald-100 rounded-lg">
-                  <CheckCircle className="text-emerald-700" size={24} />
+            <div className="bg-white dark:bg-[#112417] shadow-md rounded-2xl p-6 border border-gray-200 dark:border-gray-800 flex flex-col h-full transition-colors">
+              <div className="flex items-center space-x-3 mb-6 border-b border-gray-100 dark:border-gray-800 pb-4">
+                <div className="p-2 bg-emerald-100 dark:bg-emerald-900/40 rounded-lg">
+                  <CheckCircle className="text-emerald-700 dark:text-emerald-400" size={24} />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Diagnostic Result</h3>
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white">Diagnostic Result</h3>
               </div>
               
               <div className="flex-1 flex flex-col justify-center">
-                <h4 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
+                <h4 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-6 text-center">
                   {result.class_name ? result.class_name.replace(/_/g, " ") : "Unknown"}
                 </h4>
                 
-                <div className="w-full bg-gray-100 rounded-full h-3.5 mb-2 overflow-hidden shadow-inner border border-gray-200">
+                <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-3.5 mb-2 overflow-hidden shadow-inner border border-gray-200 dark:border-gray-700">
                   <MotionDiv 
                     initial={{ width: 0 }}
                     animate={{ width: `${(result.confidence || 0) * 100}%` }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className={`h-full rounded-full ${result.confidence && result.confidence >= 0.85 ? 'bg-emerald-600' : 'bg-amber-500'}`} 
+                    className={`h-full rounded-full ${result.confidence && result.confidence >= 0.85 ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-amber-500 dark:bg-amber-400'}`} 
                   ></MotionDiv>
                 </div>
-                <div className="flex justify-between text-sm font-semibold text-gray-600">
+                <div className="flex justify-between text-sm font-semibold text-gray-600 dark:text-gray-400">
                   <span>Confidence Level</span>
-                  <span className="text-emerald-700 font-bold">{((result.confidence || 0) * 100).toFixed(1)}%</span>
+                  <span className="text-emerald-700 dark:text-emerald-400 font-bold">{((result.confidence || 0) * 100).toFixed(1)}%</span>
                 </div>
               </div>
             </div>
 
             {/* LLM Advisory Card */}
             {result.advisory && (
-              <div className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 flex flex-col h-full md:row-span-2">
-                <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-                  <h3 className="text-lg font-bold text-gray-900">ZARI Expert Advisory</h3>
-                  <div className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold tracking-wide border border-emerald-200">LLM SYNTHESIS</div>
+              <div className="bg-white dark:bg-[#112417] shadow-md rounded-2xl p-6 border border-gray-200 dark:border-gray-800 flex flex-col h-full md:row-span-2 transition-colors">
+                <div className="flex items-center justify-between mb-6 border-b border-gray-100 dark:border-gray-800 pb-4">
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">ZARI Expert Advisory</h3>
+                  <div className="px-3 py-1 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-800 dark:text-emerald-300 rounded-full text-xs font-bold tracking-wide border border-emerald-200 dark:border-emerald-800/50">LLM SYNTHESIS</div>
                 </div>
-                <p className="flex-1 text-right text-xl md:text-2xl leading-loose text-gray-800 font-serif" dir="rtl">
+                <p className="flex-1 text-right text-xl md:text-2xl leading-loose text-gray-800 dark:text-gray-200 font-serif" dir="rtl">
                   {result.advisory}
                 </p>
               </div>
@@ -187,9 +229,9 @@ export default function InferenceTester() {
 
             {/* Audio Player Card */}
             {result.audio_url && (
-              <div className="bg-emerald-800 border border-emerald-700 shadow-md rounded-2xl p-6 text-white flex flex-col justify-center">
+              <div className="bg-emerald-800 dark:bg-emerald-900 border border-emerald-700 dark:border-emerald-800 shadow-md rounded-2xl p-6 text-white flex flex-col justify-center transition-colors">
                 <div className="flex items-center space-x-3 mb-4">
-                  <FileAudio size={24} className="text-emerald-200" />
+                  <FileAudio size={24} className="text-emerald-200 dark:text-emerald-300" />
                   <h3 className="text-lg font-bold">Listen to Advisory</h3>
                 </div>
                 <audio controls className="w-full rounded-lg" key={result.audio_url}>
