@@ -8,10 +8,10 @@ const MotionButton = dynamic(() => import("framer-motion").then((mod) => mod.mot
 
 export default function DiagnosisShowcase() {
   return (
-    <section className="w-full py-24 bg-[#0A1A10] text-gray-200 overflow-hidden relative">
+    <section className="w-full py-24 bg-white text-gray-900 border-t border-gray-200 overflow-hidden relative">
       
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-[#1A4D2E] opacity-30 rounded-full blur-[120px] pointer-events-none -translate-y-1/2" />
+      {/* Soft Background Accent */}
+      <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-emerald-100/50 rounded-full blur-[120px] pointer-events-none -translate-y-1/2" />
 
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -24,25 +24,22 @@ export default function DiagnosisShowcase() {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-start gap-6"
           >
-            <h2 className="text-4xl lg:text-5xl font-bold text-white leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
               Diagnose your sick crop <br />
-              <span className="text-[#00FFA3]">in seconds.</span>
+              <span className="text-emerald-700">in seconds.</span>
             </h2>
             
-            <p className="text-lg text-gray-400 max-w-md">
+            <p className="text-lg text-gray-600 max-w-md leading-relaxed">
               Upload a photo of your leaf and let our edge-powered computer vision model instantly identify the disease and generate a localized treatment protocol.
             </p>
 
-            {/* Animated Call to Action Button */}
+            {/* Call to Action Button */}
             <MotionButton
-              whileHover={{ 
-                scale: 1.05, 
-                boxShadow: "0px 0px 20px rgba(0, 255, 163, 0.5)" 
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-4 bg-gradient-to-r from-[#1A4D2E] to-[#4F6F52] border border-[#00FFA3]/50 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center gap-3 hover:from-[#4F6F52] hover:to-[#1A4D2E] transition-all group"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="mt-4 bg-emerald-700 hover:bg-emerald-800 border border-emerald-800 text-white px-8 py-4 rounded-full font-bold text-lg flex items-center gap-3 shadow-lg transition-all group"
             >
-              <ScanLine className="w-5 h-5 text-[#00FFA3]" />
+              <ScanLine className="w-5 h-5 text-white" />
               Get a free diagnosis
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </MotionButton>
@@ -57,14 +54,14 @@ export default function DiagnosisShowcase() {
             className="flex justify-center lg:justify-end"
           >
             {/* Phone Frame */}
-            <div className="relative w-[320px] h-[650px] bg-[#050B07] border-[12px] border-[#112A18] rounded-[3rem] overflow-hidden shadow-2xl shadow-[#00FFA3]/10">
+            <div className="relative w-[320px] h-[650px] bg-gray-900 border-[12px] border-gray-800 rounded-[3rem] overflow-hidden shadow-2xl">
               
               {/* Phone Top Notch */}
-              <div className="absolute top-0 inset-x-0 h-7 bg-[#112A18] rounded-b-2xl w-40 mx-auto z-20 flex justify-center items-end pb-2">
-                <div className="w-12 h-1.5 bg-gray-800 rounded-full"></div>
+              <div className="absolute top-0 inset-x-0 h-7 bg-gray-800 rounded-b-2xl w-40 mx-auto z-20 flex justify-center items-end pb-2">
+                <div className="w-12 h-1.5 bg-gray-700 rounded-full"></div>
               </div>
 
-              {/* Scrolling Screen Content (The "Animated Pictures") */}
+              {/* Scrolling Screen Content */}
               <MotionDiv
                 animate={{ y: [0, -250, 0] }}
                 transition={{ 
@@ -73,53 +70,52 @@ export default function DiagnosisShowcase() {
                   ease: "easeInOut",
                   repeatType: "reverse"
                 }}
-                className="absolute top-0 left-0 w-full p-4 pt-12 flex flex-col gap-4 bg-[#0A1A10]"
+                className="absolute top-0 left-0 w-full p-4 pt-12 flex flex-col gap-4 bg-white"
               >
                 {/* Mock Image Upload Area */}
-                <div className="w-full h-48 bg-[#1A4D2E]/40 rounded-xl border border-[#00FFA3]/20 flex items-center justify-center overflow-hidden relative">
-                   <div className="text-[#00FFA3]/50 flex flex-col items-center">
-                      <ScanLine className="w-10 h-10 mb-2" />
-                      <span className="text-sm">Analyzing late_blight...</span>
+                <div className="w-full h-48 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-center overflow-hidden relative">
+                   <div className="text-emerald-800 flex flex-col items-center">
+                      <ScanLine className="w-10 h-10 mb-2 text-emerald-600" />
+                      <span className="text-sm font-semibold">Analyzing late_blight...</span>
                    </div>
                    {/* Scanning Line Animation */}
                    <MotionDiv 
                      animate={{ y: [-100, 100] }}
                      transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                     className="absolute w-full h-1 bg-[#00FFA3] shadow-[0_0_10px_#00FFA3] opacity-70"
+                     className="absolute w-full h-1 bg-emerald-500 shadow-[0_0_8px_#10B981] opacity-80"
                    />
                 </div>
 
                 {/* Mock Diagnosis Results */}
-                <div className="w-full bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <h3 className="text-[#00FFA3] font-semibold mb-2">Detected: Late Blight</h3>
-                  <div className="h-2 w-full bg-gray-700 rounded-full overflow-hidden mb-4">
+                <div className="w-full bg-gray-50 rounded-xl p-4 border border-gray-200">
+                  <h3 className="text-emerald-800 font-bold mb-2">Detected: Late Blight</h3>
+                  <div className="h-2.5 w-full bg-gray-200 rounded-full overflow-hidden mb-3">
                     <MotionDiv 
                       initial={{ width: 0 }}
                       whileInView={{ width: "94%" }}
-                      className="h-full bg-gradient-to-r from-[#1A4D2E] to-[#00FFA3]"
+                      className="h-full bg-emerald-600"
                     />
                   </div>
-                  <p className="text-xs text-gray-400">Confidence Score: 94%</p>
+                  <p className="text-xs text-gray-600 font-medium">Confidence Score: 94%</p>
                 </div>
 
                 {/* Mock Symptoms Section */}
-                <div className="w-full bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <h4 className="text-white text-sm font-medium mb-3">Symptoms</h4>
+                <div className="w-full bg-gray-50 rounded-xl p-4 border border-gray-200">
+                  <h4 className="text-gray-900 text-sm font-bold mb-3">Symptoms</h4>
                   <div className="space-y-2">
-                    <div className="h-3 w-3/4 bg-gray-600/50 rounded animate-pulse"></div>
-                    <div className="h-3 w-full bg-gray-600/50 rounded animate-pulse"></div>
-                    <div className="h-3 w-5/6 bg-gray-600/50 rounded animate-pulse"></div>
+                    <div className="h-3 w-3/4 bg-gray-300 rounded"></div>
+                    <div className="h-3 w-full bg-gray-300 rounded"></div>
+                    <div className="h-3 w-5/6 bg-gray-300 rounded"></div>
                   </div>
                 </div>
 
                 {/* Mock Treatment Section */}
-                <div className="w-full bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                  <h4 className="text-white text-sm font-medium mb-3">Llama-3 Treatment Plan</h4>
+                <div className="w-full bg-gray-50 rounded-xl p-4 border border-gray-200">
+                  <h4 className="text-gray-900 text-sm font-bold mb-3">Llama-3 Treatment Plan</h4>
                   <div className="space-y-2">
-                    <div className="h-3 w-full bg-[#1A4D2E] rounded"></div>
-                    <div className="h-3 w-4/5 bg-[#1A4D2E] rounded"></div>
-                    <div className="h-3 w-full bg-[#1A4D2E] rounded"></div>
-                    <div className="h-3 w-2/3 bg-[#1A4D2E] rounded"></div>
+                    <div className="h-3 w-full bg-emerald-100 rounded"></div>
+                    <div className="h-3 w-4/5 bg-emerald-100 rounded"></div>
+                    <div className="h-3 w-full bg-emerald-100 rounded"></div>
                   </div>
                 </div>
                 
