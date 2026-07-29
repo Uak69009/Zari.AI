@@ -19,7 +19,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body style={{ backgroundColor: "#FFFFFF", color: "#0F172A", fontFamily: "Inter, system-ui, sans-serif" }}>
+      <body style={{ backgroundColor: "#0A1A10", color: "#E5E7EB", fontFamily: "Inter, system-ui, sans-serif" }}>
         <Navbar />
         <main className="w-full">
           {children}

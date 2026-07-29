@@ -69,9 +69,9 @@ export default function InferenceTester() {
     <div className="flex flex-col items-center w-full space-y-8">
       {/* Upload Zone */}
       <MotionDiv 
-        whileHover={{ scale: 1.01 }}
-        whileTap={{ scale: 0.99 }}
-        className="w-full flex flex-col items-center justify-center border-2 border-dashed border-emerald-300 rounded-2xl p-10 bg-emerald-50/40 hover:bg-emerald-50 transition-colors relative cursor-pointer"
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        className="w-full flex flex-col items-center justify-center border-2 border-dashed border-[#00FFA3]/50 rounded-2xl p-10 bg-black/20 hover:bg-[#00FFA3]/5 transition-colors relative cursor-pointer"
       >
         <input
           type="file"
@@ -80,11 +80,9 @@ export default function InferenceTester() {
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
         />
         <div className="text-center flex flex-col items-center">
-          <div className="w-16 h-16 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center mb-4">
-            <UploadCloud className="text-emerald-700 w-8 h-8" />
-          </div>
-          <p className="text-gray-900 font-bold text-lg mb-1">Drag & drop leaf image here</p>
-          <p className="text-sm text-gray-500 font-medium">Or click to browse (JPG, PNG)</p>
+          <UploadCloud className="text-[#00FFA3] w-16 h-16 mb-4" />
+          <p className="text-white font-medium text-lg mb-1">Drag & drop leaf image here</p>
+          <p className="text-sm text-gray-400 font-medium">Or click to browse (JPG, PNG)</p>
         </div>
       </MotionDiv>
 
@@ -101,14 +99,14 @@ export default function InferenceTester() {
             <img 
               src={preview} 
               alt="Crop Preview" 
-              className="max-h-72 object-contain rounded-2xl shadow-md border border-gray-200" 
+              className="max-h-72 object-contain rounded-2xl shadow-[0_0_20px_rgba(0,255,163,0.15)] border border-[#00FFA3]/30" 
             />
             <MotionButton
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.05, boxShadow: "0px 0px 15px rgba(0, 255, 163, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
               onClick={handleAnalyze}
               disabled={loading}
-              className="px-10 py-4 bg-emerald-700 hover:bg-emerald-800 border border-emerald-800 text-white font-extrabold rounded-full shadow-md disabled:opacity-70 disabled:cursor-not-allowed transition-all w-full max-w-sm flex items-center justify-center space-x-3"
+              className="px-10 py-4 bg-gradient-to-r from-[#1A4D2E] to-[#4F6F52] border border-[#00FFA3]/30 text-white font-extrabold rounded-full shadow-lg hover:from-[#4F6F52] hover:to-[#1A4D2E] disabled:opacity-70 disabled:cursor-not-allowed transition-all w-full max-w-sm flex items-center justify-center space-x-3"
             >
               {loading ? (
                 <>
@@ -117,7 +115,7 @@ export default function InferenceTester() {
                 </>
               ) : (
                 <>
-                  <Activity className="w-5 h-5 text-white" />
+                  <Activity className="w-5 h-5 text-[#00FFA3]" />
                   <span>Run AI Diagnostic</span>
                 </>
               )}
@@ -128,8 +126,8 @@ export default function InferenceTester() {
 
       {/* Error State */}
       {error && (
-        <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-50 border-l-4 border-red-500 text-red-700 rounded-lg w-full font-medium flex items-center space-x-3">
-          <AlertTriangle size={24} className="text-red-500" />
+        <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-900/30 border-l-4 border-red-500 text-red-200 rounded-lg w-full font-medium flex items-center space-x-3 backdrop-blur-md">
+          <AlertTriangle size={24} className="text-red-400" />
           <span>{error}</span>
         </MotionDiv>
       )}
@@ -144,42 +142,42 @@ export default function InferenceTester() {
           >
             
             {/* CV Inference Card */}
-            <div className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 flex flex-col h-full">
-              <div className="flex items-center space-x-3 mb-6 border-b border-gray-100 pb-4">
-                <div className="p-2 bg-emerald-100 rounded-lg">
-                  <CheckCircle className="text-emerald-700" size={24} />
+            <div className="bg-black/30 shadow-xl rounded-2xl p-6 border border-white/10 flex flex-col h-full backdrop-blur-md">
+              <div className="flex items-center space-x-3 mb-6 border-b border-white/10 pb-4">
+                <div className="p-2 bg-[#00FFA3]/10 rounded-lg">
+                  <CheckCircle className="text-[#00FFA3]" size={24} />
                 </div>
-                <h3 className="text-lg font-bold text-gray-900">Diagnostic Result</h3>
+                <h3 className="text-lg font-bold text-gray-200">Diagnostic Result</h3>
               </div>
               
               <div className="flex-1 flex flex-col justify-center">
-                <h4 className="text-3xl font-extrabold text-gray-900 mb-6 text-center">
+                <h4 className="text-3xl font-extrabold text-white mb-6 text-center">
                   {result.class_name ? result.class_name.replace(/_/g, " ") : "Unknown"}
                 </h4>
                 
-                <div className="w-full bg-gray-100 rounded-full h-3.5 mb-2 overflow-hidden shadow-inner border border-gray-200">
+                <div className="w-full bg-white/10 rounded-full h-3 mb-2 overflow-hidden shadow-inner">
                   <MotionDiv 
                     initial={{ width: 0 }}
                     animate={{ width: `${(result.confidence || 0) * 100}%` }}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className={`h-full rounded-full ${result.confidence && result.confidence >= 0.85 ? 'bg-emerald-600' : 'bg-amber-500'}`} 
+                    className={`h-3 rounded-full ${result.confidence && result.confidence >= 0.85 ? 'bg-[#00FFA3] shadow-[0_0_10px_#00FFA3]' : 'bg-amber-400'}`} 
                   ></MotionDiv>
                 </div>
-                <div className="flex justify-between text-sm font-semibold text-gray-600">
+                <div className="flex justify-between text-sm font-semibold text-gray-400">
                   <span>Confidence Level</span>
-                  <span className="text-emerald-700 font-bold">{((result.confidence || 0) * 100).toFixed(1)}%</span>
+                  <span className="text-[#00FFA3]">{((result.confidence || 0) * 100).toFixed(1)}%</span>
                 </div>
               </div>
             </div>
 
             {/* LLM Advisory Card */}
             {result.advisory && (
-              <div className="bg-white shadow-md rounded-2xl p-6 border border-gray-200 flex flex-col h-full md:row-span-2">
-                <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
-                  <h3 className="text-lg font-bold text-gray-900">ZARI Expert Advisory</h3>
-                  <div className="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold tracking-wide border border-emerald-200">LLM SYNTHESIS</div>
+              <div className="bg-black/30 shadow-xl rounded-2xl p-6 border border-white/10 flex flex-col h-full md:row-span-2 backdrop-blur-md">
+                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
+                  <h3 className="text-lg font-bold text-gray-200">ZARI Expert Advisory</h3>
+                  <div className="px-3 py-1 bg-[#00FFA3]/10 text-[#00FFA3] rounded-full text-xs font-bold tracking-wide border border-[#00FFA3]/30">LLM SYNTHESIS</div>
                 </div>
-                <p className="flex-1 text-right text-xl md:text-2xl leading-loose text-gray-800 font-serif" dir="rtl">
+                <p className="flex-1 text-right text-xl md:text-2xl leading-loose text-gray-300 font-serif" dir="rtl">
                   {result.advisory}
                 </p>
               </div>
@@ -187,9 +185,9 @@ export default function InferenceTester() {
 
             {/* Audio Player Card */}
             {result.audio_url && (
-              <div className="bg-emerald-800 border border-emerald-700 shadow-md rounded-2xl p-6 text-white flex flex-col justify-center">
+              <div className="bg-gradient-to-br from-[#1A4D2E]/80 to-[#0A1A10] border border-[#00FFA3]/20 shadow-xl rounded-2xl p-6 text-white flex flex-col justify-center backdrop-blur-md">
                 <div className="flex items-center space-x-3 mb-4">
-                  <FileAudio size={24} className="text-emerald-200" />
+                  <FileAudio size={24} className="text-[#00FFA3]" />
                   <h3 className="text-lg font-bold">Listen to Advisory</h3>
                 </div>
                 <audio controls className="w-full rounded-lg" key={result.audio_url}>
@@ -202,6 +200,14 @@ export default function InferenceTester() {
           </MotionDiv>
         )}
       </AnimatePresenceWrapper>
+
+      {/* Backend Error State from API Response */}
+      {result && result.status === "error" && (
+        <MotionDiv initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-900/30 border-l-4 border-red-500 text-red-200 rounded-lg w-full font-medium flex items-center space-x-3 backdrop-blur-md">
+          <AlertTriangle size={24} className="text-red-400" />
+          <span>{result.message || "An unknown backend error occurred."}</span>
+        </MotionDiv>
+      )}
     </div>
   );
 }

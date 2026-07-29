@@ -1,6 +1,0 @@
-ZARI.ai Pre-Flight Audit Report
-===============================
-
-Environment check PASSED. All required ML dependencies are installed.
-Data audit processed 237061 images.
-Data integrity check PASSED. Zero corruption detected.
