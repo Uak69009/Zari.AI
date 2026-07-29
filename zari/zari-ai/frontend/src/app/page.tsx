@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import { Globe2, Leaf, MessageCircle, Activity, ScanLine } from "lucide-react";
 import InferenceTester from "./components/InferenceTester";
 import DiagnosisShowcase from "./components/DiagnosisShowcase";
 import CropCards from "./components/CropCards";
 import Footer from "./components/Footer";
-import WorldMap from "./components/WorldMap";
 
 const MotionDiv = dynamic(() => import("framer-motion").then((mod) => mod.motion.div), { ssr: false }) as any;
 const AnimatePresenceWrapper = dynamic(() => import("framer-motion").then((mod) => mod.AnimatePresence), { ssr: false }) as any;
@@ -54,27 +53,9 @@ const FlipText = ({ english, urdu }: { english: string; urdu: string }) => {
 };
 
 export default function Home() {
-  const [mounted, setMounted] = useState(false);
-  
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  // Map pulse points
-  const pulsePoints = [
-    { top: "35%", left: "68%", duration: 3.5, delay: 0 },   
-    { top: "38%", left: "66%", duration: 4.2, delay: 1.5 }, 
-    { top: "45%", left: "18%", duration: 5.0, delay: 0.5 }, 
-    { top: "55%", left: "75%", duration: 3.8, delay: 2.1 }, 
-    { top: "60%", left: "45%", duration: 4.5, delay: 1.0 }, 
-    { top: "25%", left: "52%", duration: 3.2, delay: 0.8 }, 
-  ];
 
   return (
     <main className="min-h-screen bg-white text-gray-900 relative overflow-x-hidden font-sans">
-      
-      {/* 1. World Map Vector Component with Pakistan Highlight Node */}
-      <WorldMap />
 
       <div className="relative z-10 container mx-auto px-6 py-16 flex flex-col items-center">
         
