@@ -53,12 +53,12 @@ DATASET_SOURCES = {
 
 def create_folders():
     """Create the data directory structure."""
-    print("📁 Creating folder structure...")
+    print("Creating folder structure...")
     os.makedirs(CLEANED_DIR, exist_ok=True)
     for name, path in DATASET_PATHS.items():
         os.makedirs(path, exist_ok=True)
-        print(f"   ✓ {name}: {path}")
-    print(f"\n✅ Data directories created at: {DATA_DIR}\n")
+        print(f"   [OK] {name}: {path}")
+    print(f"\n[OK] Data directories created at: {DATA_DIR}\n")
 
 
 def _is_dir_populated(path: str) -> bool:
@@ -73,13 +73,13 @@ def _is_dir_populated(path: str) -> bool:
 
 def download_datasets():
     """Download all four datasets into their respective raw/ subdirectories."""
-    print("⬇️  Beginning dataset downloads...\n")
+    print("Beginning dataset downloads...\n")
 
     for name, source in DATASET_SOURCES.items():
         target_path = DATASET_PATHS[name]
 
         if _is_dir_populated(target_path):
-            print(f"⏭️  {name}: Already populated, skipping.\n")
+            print(f"[SKIP] {name}: Already populated, skipping.\n")
             continue
 
         if source["type"] == "kaggle":
@@ -87,12 +87,12 @@ def download_datasets():
         elif source["type"] == "git":
             _download_git(name, source["url"], target_path)
 
-    print("\n🎉 All downloads completed! Raw data is ready for taxonomy mapping.")
+    print("\nAll downloads completed! Raw data is ready for taxonomy mapping.")
 
 
 def _download_kaggle(name: str, slug: str, target_path: str):
     """Download a dataset from Kaggle."""
-    print(f"📦 Downloading {name} from Kaggle: {slug}")
+    print(f"Downloading {name} from Kaggle: {slug}")
     try:
         subprocess.run(
             [
@@ -103,29 +103,29 @@ def _download_kaggle(name: str, slug: str, target_path: str):
             ],
             check=True,
         )
-        print(f"   ✅ {name} downloaded successfully.\n")
+        print(f"   [OK] {name} downloaded successfully.\n")
     except FileNotFoundError:
         print(
-            f"   ❌ Kaggle CLI not found. Install it with: pip install kaggle\n"
+            f"   [ERR] Kaggle CLI not found. Install it with: pip install kaggle\n"
             f"      Then place your kaggle.json in ~/.kaggle/\n"
         )
     except subprocess.CalledProcessError as e:
-        print(f"   ❌ Failed to download {name}. Error: {e}\n")
+        print(f"   [ERR] Failed to download {name}. Error: {e}\n")
 
 
 def _download_git(name: str, url: str, target_path: str):
     """Clone a dataset from GitHub."""
-    print(f"📦 Cloning {name} from GitHub: {url}")
+    print(f"Cloning {name} from GitHub: {url}")
     try:
         subprocess.run(
             ["git", "clone", "--depth", "1", url, target_path],
             check=True,
         )
-        print(f"   ✅ {name} cloned successfully.\n")
+        print(f"   [OK] {name} cloned successfully.\n")
     except FileNotFoundError:
-        print(f"   ❌ Git not found. Please install Git.\n")
+        print(f"   [ERR] Git not found. Please install Git.\n")
     except subprocess.CalledProcessError as e:
-        print(f"   ❌ Failed to clone {name}. Error: {e}\n")
+        print(f"   [ERR] Failed to clone {name}. Error: {e}\n")
 
 
 def print_summary():
@@ -140,15 +140,15 @@ def print_summary():
                 f for f in os.listdir(path)
                 if not f.startswith(".")
             ])
-            print(f"  ✅ {name:15s} — {count} items")
+            print(f"  [OK] {name:15s} - {count} items")
         else:
-            print(f"  ⬜ {name:15s} — empty / not downloaded")
+            print(f"  [--] {name:15s} - empty / not downloaded")
 
     print(f"{'='*60}\n")
 
 
 if __name__ == "__main__":
-    print("\n🌿 ZARI.ai Dataset Setup Script")
+    print("\nZARI.ai Dataset Setup Script")
     print("=" * 40 + "\n")
 
     create_folders()

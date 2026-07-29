@@ -188,9 +188,9 @@ This is the primary user journey — a farmer sends a photo of a diseased leaf v
 
 ### 3.3 CV Inference Service (`backend/services/cv_inference.py`)
 
-- Loads ONNX model once at startup (singleton)
-- Preprocesses images to model input spec
-- Runs inference via `onnxruntime.InferenceSession`
+- Loads PyTorch JIT (`best_model_jit.pt`) once at startup (singleton)
+- Preprocesses images to model input spec (224x224 RGB)
+- Runs inference natively via `torch.jit` (No C++ ONNX dependency required)
 - Applies 85% Softmax confidence threshold
 - Returns `(disease_label, confidence, is_confident)` tuple
 

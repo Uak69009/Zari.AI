@@ -1,0 +1,3 @@
+Total Rows: 237061
+Total Columns: 8
+Columns: ['dataset_source', 'class_name', 'file_path', 'width', 'height', 'aspect_ratio', 'color_channels', 'file_size_kb']
