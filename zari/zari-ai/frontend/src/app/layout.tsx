@@ -13,13 +13,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </head>
-      <body style={{ backgroundColor: "#FFFFFF", color: "#0F172A", fontFamily: "Inter, system-ui, sans-serif" }}>
+      <body style={{ backgroundColor: "#FFFFFF", color: "#0F172A", fontFamily: "Inter, system-ui, sans-serif" }} suppressHydrationWarning>
         <Navbar />
         <main className="w-full">
           {children}
