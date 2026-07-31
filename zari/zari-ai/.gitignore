@@ -29,3 +29,9 @@ frontend/.vercel/
 # OS Files
 .DS_Store
 Thumbs.db
+
+# Archives and Temporary Uploads
+*.tar
+*.zip
+.tmp.driveupload/
+
