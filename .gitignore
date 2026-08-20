@@ -1,0 +1,31 @@
+# Python / Environment
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Raw Datasets & Large CSVs (>50MB)
+ml_pipeline/data/raw/
+ml_pipeline/data/cleaned/
+ml_pipeline/data/*.csv
+ml_pipeline/.tmp.driveupload/
+
+# Large Raw Checkpoints (>100MB)
+ml_pipeline/scripts/runs/**/best_model.pth
+
+# Frontend / Node
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# Backend Temporary Files
+backend/temp_audio/
+*.log
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
